@@ -98,8 +98,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      LOWERCASE_IMAGE_NAME: ${{ toLower(env.IMAGE_NAME) }}
     steps:
       - name: testit
-        run: |
-          echo "${{ env }}"
-          docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main  
+        run: docker run ${{ env.REGISTRY }}/${{ env.LOWERCASE_IMAGE_NAME }}:main  
