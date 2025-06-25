@@ -99,4 +99,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: testit
-        run: docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main  
+        run: docker run ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}  
