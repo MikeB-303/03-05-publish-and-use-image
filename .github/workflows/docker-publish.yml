@@ -98,8 +98,10 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      LOWERCASE_IMAGE_NAME: ${{ toLower(env.IMAGE_NAME) }}
     steps:
+      - name: Lowercase image name in shell
+        run: |
+          lower=$(echo "${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_NAME_LOWER=$lower" >> $GITHUB_ENV
       - name: testit
-        run: docker run ${{ env.REGISTRY }}/${{ env.LOWERCASE_IMAGE_NAME }}:main  
+        run: docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:main  
