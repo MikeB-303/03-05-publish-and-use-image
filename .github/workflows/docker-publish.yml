@@ -19,6 +19,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  LOWERCASE_IMAGE_NAME: ${{ toLower(env.IMAGE_NAME) }}
 
 
 jobs:
@@ -99,4 +100,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: testit
-        run: docker run ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}  
+        run: docker run ${{ env.REGISTRY }}/${{ env.LOWERCASE_IMAGE_NAME }}:main  
